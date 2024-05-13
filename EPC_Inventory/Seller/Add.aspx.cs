@@ -109,11 +109,11 @@ namespace EPC_Inventory
                     }
                 }
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Data inserted successfully.');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Product added successfully.');", true);
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "ErrorAlert", $"alert('An error occurred while inserting data: {ex.Message}');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "ErrorAlert", $"alert('An error occurred while inserting product: {ex.Message}');", true);
             }
         }
     }

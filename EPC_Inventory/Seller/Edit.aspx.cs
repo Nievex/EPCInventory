@@ -90,7 +90,7 @@ namespace EPC_Inventory.Seller
 
             byte[] imageBytes = null;
             HttpPostedFile imageFile = Request.Files["inputFile"];
-            if (imageFile != null)
+            if (imageFile != null && imageFile.ContentLength > 0)
             {
                 string fileName = Path.GetFileName(imageFile.FileName);
                 string fileExtension = Path.GetExtension(fileName).ToLower();
@@ -106,23 +106,18 @@ namespace EPC_Inventory.Seller
                     return;
                 }
             }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please select an image');", true);
-                return;
-            }
 
             string category = CategoryList.SelectedValue;
             if (string.IsNullOrEmpty(category))
             {
-                Response.Write("Please select a category.");
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Please select a category.');", true);
                 return;
             }
 
             string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
             string query = "UPDATE PRODUCTSINV SET NAME = :ProductName, CATEGORY = :Category, STOCKS = :Stocks, PRICE = :Price";
 
-            if (imageBytes != existingImageData)
+            if (imageBytes != null)
             {
                 query += ", IMAGEURL = :ImageData";
             }
@@ -140,7 +135,7 @@ namespace EPC_Inventory.Seller
                     command.Parameters.Add("Stocks", OracleDbType.Decimal).Value = stocks;
                     command.Parameters.Add("Price", OracleDbType.Decimal).Value = price;
 
-                    if (imageBytes != existingImageData)
+                    if (imageBytes != null)
                     {
                         command.Parameters.Add("ImageData", OracleDbType.Blob).Value = imageBytes;
                     }
@@ -150,8 +145,14 @@ namespace EPC_Inventory.Seller
 
                     if (rowsAffected > 0)
                     {
-                        // Redirect to the same page to perform an absolute refresh
-                        Response.Redirect(Request.RawUrl);
+                        // Clear form fields and display success message
+                        ProductIdField.Text = string.Empty;
+                        ProductNameField.Text = string.Empty;
+                        CategoryList.SelectedIndex = -1; // Clear selected category
+                        StocksField.Text = string.Empty;
+                        PriceField.Text = string.Empty;
+                        ImagePreview.ImageUrl = string.Empty;
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Product updated successfully!');", true);
                     }
                     else
                     {
@@ -160,5 +161,7 @@ namespace EPC_Inventory.Seller
                 }
             }
         }
+
+
     }
 }
