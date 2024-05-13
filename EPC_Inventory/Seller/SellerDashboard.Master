@@ -1,0 +1,103 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SellerDashboard.master.cs" Inherits="EPC_Inventory.SellerDashboard" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="form1" runat="server" enctype="multipart/form-data">
+        <header class="max-width">
+            <nav class="nav-container">
+                <div class="menu-logo" onclick="openNav()">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <span>Menu</span>
+                </div>
+                <div class="dropdown">
+                    <div class="links-container">
+                        <asp:Image runat="server" ID="ShopLogo" ImageUrl="~/images/logo.svg" CssClass="nav-image" />
+                        <asp:Label runat="server" ID="ShopName" CssClass="nav-shop-name">Easy Pet Care</asp:Label>
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="profile-dropdown">
+                        <a href="ShopProfile.aspx">Update Profile</a>
+                        <asp:Button runat="server" ID="LogoutButton" OnClick="LogoutBtnClick" CssClass="logout-btn" Text="Logout" />
+                    </div>
+                </div>
+
+            </nav>
+        </header>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="sidenav-profile">
+                <asp:Image runat="server" ID="SideShopLogo" ImageUrl="~/images/logo.svg" CssClass="side-logo" />
+                <asp:Label runat="server" ID="SideShopName" CssClass="nav-shop-name">Easy Pet Care</asp:Label>
+            </div>
+            <a href="#" class="sidenav-link">
+                <div class="sidenav-link-con">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span>Dashboard</span>
+                </div>
+            </a>
+
+            <a href="Inventory.aspx" class="sidenav-link">
+                <div class="sidenav-link-con">
+                    <i class="fa fa-th-large" aria-hidden="true"></i>
+                    <span>Inventory</span>
+                </div>
+            </a>
+
+            <a href="#" class="sidenav-link">
+                <div class="sidenav-link-con">
+                    <i class="fa fa-list-ol" aria-hidden="true"></i>
+                    <span>Orders</span>
+                </div>
+            </a>
+
+            <a href="#" class="sidenav-link">
+                <div class="sidenav-link-con">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    <span>Sales</span>
+                </div>
+            </a>
+
+            <a href="#" class="sidenav-link">
+                <div class="sidenav-link-con">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span>Profile</span>
+                </div>
+            </a>
+        </div>
+
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <script src="../script.js"></script>
+        <script>
+            function openNav() {
+                var sidebar = document.getElementById("mySidenav");
+                sidebar.classList.add("elementTransform");
+            }
+
+            function closeNav() {
+                var sidebar = document.getElementById("mySidenav");
+                sidebar.classList.remove("elementTransform");
+            }
+        </script>
+    </form>
+</body>
+</html>
