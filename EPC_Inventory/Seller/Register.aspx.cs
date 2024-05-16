@@ -13,7 +13,6 @@ namespace EPC_Inventory.Seller
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void RegisterShopBtn_Click(object sender, EventArgs e)
@@ -22,6 +21,12 @@ namespace EPC_Inventory.Seller
             {
                 try
                 {
+                    if (IsUsernameOrEmailExists(ShopUsernameField.Text, EmailField.Text))
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Username or email already exists.');", true);
+                        return;
+                    }
+
                     byte[] imageBytes = null;
                     byte[] shopImageBytes = null;
                     HttpPostedFile imageFile = Request.Files["inputFile"];
@@ -37,12 +42,9 @@ namespace EPC_Inventory.Seller
                         }
                         else
                         {
-                            Console.WriteLine("Incorrect image format.");
+                            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Incorrect image format.');", true);
+                            return;
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("File is a null");
                     }
 
                     HttpPostedFile shopImageFile = Request.Files["shopRequirementFile"];
@@ -59,13 +61,11 @@ namespace EPC_Inventory.Seller
                         }
                         else
                         {
-                            Response.Write("Incorrect image format.");
+                            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Incorrect image format.');", true);
+                            return;
                         }
                     }
-                    else
-                    {
-                        Response.Write("File is a null");
-                    }
+
                     Random rand = new Random();
                     int shopRegId = rand.Next(10000000, 99999999);
                     string shopName = ShopNameField.Text;
@@ -121,6 +121,23 @@ namespace EPC_Inventory.Seller
             else
             {
                 ErrorMessageLabel.Text = "Please fill in all required fields.";
+            }
+        }
+
+        private bool IsUsernameOrEmailExists(string username, string email)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM SHOP_REGISTRATION WHERE SHOP_USERNAME = :Username OR SHOP_EMAIL = :Email";
+                using (OracleCommand command = new OracleCommand(query, connection))
+                {
+                    command.Parameters.Add("Username", OracleDbType.Varchar2).Value = username;
+                    command.Parameters.Add("Email", OracleDbType.Varchar2).Value = email;
+                    connection.Open();
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+                    return count > 0;
+                }
             }
         }
 

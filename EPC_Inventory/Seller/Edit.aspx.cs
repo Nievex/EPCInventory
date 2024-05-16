@@ -14,9 +14,9 @@ namespace EPC_Inventory.Seller
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["productId"] != null)
+                if (Request.QueryString["Product_ID"] != null)
                 {
-                    string productId = Request.QueryString["productId"];
+                    string productId = Request.QueryString["Product_ID"];
                     FetchAndPopulateProductDetails(productId);
                 }
 
@@ -30,7 +30,7 @@ namespace EPC_Inventory.Seller
         private void FetchAndPopulateProductDetails(string productId)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-            string query = "SELECT * FROM PRODUCTSINV WHERE PRODUCTID = :ProductId";
+            string query = "SELECT * FROM PRODUCTS WHERE PRODUCT_ID = :ProductId";
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
                 using (OracleCommand command = new OracleCommand(query, connection))
@@ -42,7 +42,7 @@ namespace EPC_Inventory.Seller
                     if (reader.Read())
                     {
                         BreadcrumbID.Text = reader["NAME"].ToString();
-                        ProductIdField.Text = reader["PRODUCTID"].ToString();
+                        ProductIdField.Text = reader["PRODUCT_ID"].ToString();
                         ProductNameField.Text = reader["NAME"].ToString();
                         CategoryList.Text = reader["CATEGORY"].ToString();
                         StocksField.Text = reader["STOCKS"].ToString();
@@ -115,14 +115,14 @@ namespace EPC_Inventory.Seller
             }
 
             string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-            string query = "UPDATE PRODUCTSINV SET NAME = :ProductName, CATEGORY = :Category, STOCKS = :Stocks, PRICE = :Price";
+            string query = "UPDATE PRODUCTS SET NAME = :ProductName, CATEGORY = :Category, STOCKS = :Stocks, PRICE = :Price";
 
             if (imageBytes != null)
             {
                 query += ", IMAGEURL = :ImageData";
             }
 
-            query += " WHERE PRODUCTID = :ProductId";
+            query += " WHERE PRODUCT_ID = :ProductId";
 
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
@@ -161,7 +161,5 @@ namespace EPC_Inventory.Seller
                 }
             }
         }
-
-
     }
 }

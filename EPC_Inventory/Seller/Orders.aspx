@@ -7,52 +7,68 @@
     </div>
 
     <div class="status-container">
-        <a href="#" class="status-anchor">Pending</a>
-        <a href="#" class="status-anchor">Approved</a>
-        <a href="#" class="status-anchor">Declined</a>
-        <a href="#" class="status-anchor">Cancelled</a>
+        <asp:LinkButton runat="server" CssClass="status-anchor" OnClick="StatusAnchor_Click">Pending</asp:LinkButton>
+        <asp:LinkButton runat="server" CssClass="status-anchor" OnClick="StatusAnchor_Click">Approved</asp:LinkButton>
+        <asp:LinkButton runat="server" CssClass="status-anchor" OnClick="StatusAnchor_Click">Declined</asp:LinkButton>
+        <asp:LinkButton runat="server" CssClass="status-anchor" OnClick="StatusAnchor_Click">Cancelled</asp:LinkButton>
     </div>
 
     <div class="orders-container">
         <div class="order-grid">
-            <div class="order-card">
-                <div class="order-details">
-                    <asp:Image runat="server" ID="ProductImagePreview" />
-                    <asp:Label runat="server" ID="ProductName"></asp:Label>
-                </div>
+            <asp:Repeater runat="server" ID="OrderRepeater" OnItemCommand="OrderRepeater_ItemCommand" OnItemDataBound="OrderRepeater_ItemDataBound">
+                <ItemTemplate>
+                    <div class="order-card">
+                        <div class="order-details">
+                            <asp:Image runat="server" ID="ProductImagePreview" />
+                            <asp:Label runat="server" ID="ProductName" Text='<%# Eval("PRODUCT_NAME") %>'></asp:Label>
+                        </div>
 
-                <div class="customer-panel">
-                    <div class="order-quantity">
-                        <p>Quantity:</p>
-                        <asp:Label runat="server" ID="OrderQuantity"></asp:Label>
+                        <div class="customer-panel">
+                            <div class="simple-flx">
+                                <p>Quantity:</p>
+                                <asp:Label runat="server" ID="OrderQuantity" Text='<%# Eval("QTY") %>' CssClass="qty"></asp:Label>
+                            </div>
+                            <div class="order-price">
+                                <p>Subtotal:</p>
+                                <asp:Label runat="server" ID="OrderTotalPrice" CssClass="price" Text='<%# "₱"+Eval("SUBTOTAL", "{0:N2}") %>'></asp:Label>
+                            </div>
+
+                            <div class="payment-method">
+                                <p>Payment Method:</p>
+                                <asp:Label runat="server" ID="PaymentMethod" Text='<%# Eval("PAYMENT_METHOD") %>'></asp:Label>
+                            </div>
+
+                            <div class="customer-details">
+                                <div class="simple-flx">
+                                    <p>Name:</p>
+                                    <asp:Label runat="server" ID="CustomerName" Text='<%# Eval("CUSTOMER_NAME") %>'></asp:Label>
+                                </div>
+                                <div class="simple-flx">
+                                    <p>Address:</p>
+                                    <asp:Label runat="server" ID="CustomerAddress" Text='<%# Eval("CUSTOMER_ADDRESS") %>'></asp:Label>
+                                </div>
+                                <div class="simple-flx">
+                                    <p>Contact No.:</p>
+                                    <asp:Label runat="server" ID="CustomerContactNumber" Text='<%# Eval("CUSTOMER_CONTACT_NUMBER") %>'></asp:Label>
+                                </div>
+                                <div class="simple-flx">
+                                    <p>Date ordered:</p>
+                                    <asp:Label runat="server" ID="OrderDate" Text='<%# Eval("ORDER_DATE", "{0:MM/dd/yyyy}") %>'></asp:Label>
+                                </div>
+                            </div>
+
+                            <asp:DropDownList runat="server" ID="StatusDropdown" CssClass="status-dropdown" SelectedValue='<%# Eval("ORDER_STATUS") %>'>
+                                <asp:ListItem Value="Pending">Pending</asp:ListItem>
+                                <asp:ListItem Value="Approved">Approve</asp:ListItem>
+                                <asp:ListItem Value="Declined">Decline</asp:ListItem>
+                                <asp:ListItem Value="Cancelled">Cancel</asp:ListItem>
+                            </asp:DropDownList>
+
+                            <asp:Button runat="server" Text="Submit" CssClass="order-update-btn" CommandName="UpdateStatus" CommandArgument='<%# Eval("ORDER_ID") %>' />
+                        </div>
                     </div>
-                    <div class="order-price">
-                        <p>Subtotal:</p>
-                        <asp:Label runat="server" ID="OrderTotalPrice" CssClass="price"></asp:Label>
-                    </div>
-
-                    <div class="payment-method">
-                        <p>Payment Method:</p>
-                        <asp:Label runat="server" ID="PaymentMethod"></asp:Label>
-                    </div>
-
-                    <div class="customer-details">
-                        <asp:Label runat="server" ID="CustomerName"></asp:Label>
-                        <asp:Label runat="server" ID="CustomerAddress"></asp:Label>
-                        <asp:Label runat="server" ID="CustomerContactNumber"></asp:Label>
-                        <asp:Label runat="server" ID="OrderDate"></asp:Label>
-                    </div>
-
-                    <asp:DropDownList runat="server" CssClass="status-dropdown">
-                        <asp:ListItem Selected="True" Value="Pending">Pending</asp:ListItem>
-                        <asp:ListItem Value="Approved">Approve</asp:ListItem>
-                        <asp:ListItem Value="Declined">Decline</asp:ListItem>
-                        <asp:ListItem Value="Cancelled">Cancel</asp:ListItem>
-                    </asp:DropDownList>
-
-                    <asp:Button runat="server" Text="Submit" CssClass="order-update-btn" />
-                </div>
-            </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
     </div>
 </asp:Content>

@@ -123,6 +123,9 @@
     <Content Include="Shop\Review.aspx" />
     <Content Include="ShopLogin.aspx" />
     <Content Include="styles.css" />
+    <Content Include="UserSide\Login.aspx" />
+    <Content Include="UserSide\Menu.aspx" />
+    <Content Include="UserSide\Register.aspx" />
     <Content Include="Web.config" />
     <Content Include="Seller\Inventory.aspx" />
   </ItemGroup>
@@ -233,6 +236,27 @@
     </Compile>
     <Compile Include="Seller\Inventory.aspx.designer.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserSide\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserSide\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserSide\Menu.aspx.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserSide\Menu.aspx.designer.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserSide\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserSide\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

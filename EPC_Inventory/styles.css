@@ -749,6 +749,10 @@ td {
     grid-column: 1/3;
 }
 
+.invalid-field {
+    border: 1px solid var(--red);
+}
+
 /* Shop Profile */
 .shop-profile-container {
     border: 1px solid #DDD;
@@ -919,7 +923,7 @@ td {
 
 .order-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
 
@@ -948,6 +952,17 @@ td {
     justify-content: space-between;
 }
 
+.simple-flx {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.customer-details {
+    display: flex;
+    flex-direction: column;
+}
+
 .order-price .price {
     color: var(--orange);
     font-weight: 700;
@@ -964,6 +979,7 @@ td {
 .customer-panel {
     display: flex;
     flex-direction: column;
+    margin-top: 2rem;
 }
 
 .status-dropdown {

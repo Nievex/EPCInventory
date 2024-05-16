@@ -13,5 +13,6 @@ namespace EPC_Inventory.Seller
 
     public partial class Orders
     {
+        protected global::System.Web.UI.WebControls.Repeater OrderRepeater;
     }
 }

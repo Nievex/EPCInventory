@@ -10,121 +10,48 @@
         <div class="sales-card-grid">
             <div class="sales-card">
                 <h2>Products Sold</h2>
-                <p class="value">232</p>
+                <p class="value">
+                    <asp:Label runat="server" ID="ProductsSoldValue"></asp:Label>
+                </p>
             </div>
-
             <div class="sales-card">
                 <h2>Monthly Sales</h2>
-                <p class="value">P49,000</p>
+                <p class="value">
+                    <asp:Label runat="server" ID="MonthlySalesValue"></asp:Label>
+                </p>
             </div>
-
             <div class="sales-card">
                 <h2>Yearly Sales</h2>
-                <p class="value">P123,345</p>
+                <p class="value">
+                    <asp:Label runat="server" ID="YearlySalesValue"></asp:Label>
+                </p>
             </div>
         </div>
 
         <h3>Transaction History</h3>
         <table>
             <tr>
-                <th>Transaction ID</th>
-                <th>Reference Number</th>
+                <th>Order ID</th>
                 <th>Product Name</th>
                 <th>QTY</th>
-                <th>Price</th>
+                <th>Sold</th>
                 <th>Customer Name</th>
                 <th>Date</th>
+                <th>Status</th>
             </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
-            <tr>
-                <td>2309405</td>
-                <td>10129393994</td>
-                <td>Paws & Fur</td>
-                <td>2</td>
-                <td>500.00</td>
-                <td>John Smith</td>
-                <td>29-MAY-24</td>
-            </tr>
+            <asp:Repeater runat="server" ID="TransactionHistoryRepeater">
+                <itemtemplate>
+                    <tr>
+                        <td><%# Eval("ORDER_ID") %></td>
+                        <td><%# Eval("PRODUCT_NAME") %></td>
+                        <td><%# Eval("QTY") %></td>
+                        <td><%# "₱"+Eval("SUBTOTAL", "{0:N2}") %></td>
+                        <td><%# Eval("CUSTOMER_NAME") %></td>
+                        <td><%# Eval("ORDER_DATE", "{0:dd-MMM-yy}") %></td>
+                        <td><%# Eval("ORDER_STATUS") %></td>
+                    </tr>
+                </itemtemplate>
+            </asp:Repeater>
         </table>
     </div>
 </asp:Content>

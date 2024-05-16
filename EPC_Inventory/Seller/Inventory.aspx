@@ -20,9 +20,6 @@
         <div class="header">
             <table>
                 <tr>
-                    <th>
-                        <asp:CheckBox runat="server" CssClass="check-bx" />
-                    </th>
                     <th>Product ID</th>
                     <th>Image</th>
                     <th>Name</th>
@@ -34,24 +31,21 @@
                 <asp:Repeater runat="server" ID="RepeaterInventory">
                     <ItemTemplate>
                         <tr>
-                            <td>
-                                <asp:CheckBox runat="server" CssClass="check-bx" />
-                            </td>
-                            <td><%# Eval("ProductID") %></td>
+                            <td><%# Eval("Product_ID") %></td>
                             <td>
                                 <asp:Image runat="server" ID="ImagePreview" ImageUrl='<%# GetBase64Image(Eval("ImageURL")) %>' CssClass="product-img" />
                             </td>
                             <td><%# Eval("Name") %></td>
                             <td><%# Eval("Category") %></td>
                             <td><%# Eval("Stocks") %></td>
-                            <td><%# Eval("Price") %></td>
+                            <td>&#8369;<%# Eval("Price", "{0:N2}") %></td>
                             <td>
                                 <div class="dropdown">
                                     <button class="dropbtn" disabled>Action <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
 
                                     <div class="dropdown-content">
-                                        <a href='<%# "Edit.aspx?ProductID=" + Eval("ProductID") %>'>Edit</a>
-                                        <asp:Button runat="server" Text=" Delete" CssClass="delete-btn" OnClick="DeleteProduct" CommandArgument='<%# Eval("ProductID") %>' />
+                                        <a href='<%# "Edit.aspx?Product_ID=" + Eval("Product_ID") %>'>Edit</a>
+                                        <asp:Button runat="server" Text=" Delete" CssClass="delete-btn" OnClick="DeleteProduct" CommandArgument='<%# Eval("Product_ID") %>' />
                                     </div>
                                 </div>
                             </td>

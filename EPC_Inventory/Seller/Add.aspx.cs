@@ -91,7 +91,7 @@ namespace EPC_Inventory
                 int shopId = Convert.ToInt32(Session["SHOP_ID"]);
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
-                    string insertQuery = "INSERT INTO PRODUCTSINV (PRODUCTID, NAME, CATEGORY, STOCKS, PRICE, IMAGEURL, SHOP_ID) " +
+                    string insertQuery = "INSERT INTO PRODUCTS (PRODUCT_ID, NAME, CATEGORY, STOCKS, PRICE, IMAGEURL, SHOP_ID) " +
                                           "VALUES (:ProductId, :ProductName, :Category, :Stocks, :Price, :Image, :ShopId)";
 
                     using (OracleCommand command = new OracleCommand(insertQuery, connection))

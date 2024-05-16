@@ -34,7 +34,7 @@ namespace EPC_Inventory
                 string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
-                    string query = "SELECT Name, ProductID, Stocks, Price, Category, ImageURL FROM PRODUCTSINV WHERE SHOP_ID = :UserId";
+                    string query = "SELECT Name, PRODUCT_ID, Stocks, Price, Category, ImageURL FROM PRODUCTS WHERE SHOP_ID = :UserId";
                     using (OracleCommand command = new OracleCommand(query, connection))
                     {
                         command.Parameters.Add("UserId", OracleDbType.Decimal).Value = userId;
@@ -82,7 +82,7 @@ namespace EPC_Inventory
                 int shopId = Convert.ToInt32(Session["SHOP_ID"]);
 
                 string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
-                string query = "DELETE FROM PRODUCTSINV WHERE ProductID = :ProductId AND SHOP_ID = :ShopId";
+                string query = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = :ProductId AND SHOP_ID = :ShopId";
 
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
@@ -96,7 +96,7 @@ namespace EPC_Inventory
 
                         if (rowsAffected > 0)
                         {
-                            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Product deleted successfully.');", true);
+                            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Product deleted successfully.'); window.location.href = window.location.href;", true);
                         }
                         else
                         {
@@ -127,7 +127,7 @@ namespace EPC_Inventory
                     if (searchQuery.StartsWith("id:"))
                     {
                         string productId = searchQuery.Substring(3);
-                        whereClause += "ProductID = :ProductId";
+                        whereClause += "PRODUCT_ID = :ProductId";
                     }
                     else
                     {
@@ -135,7 +135,7 @@ namespace EPC_Inventory
                     }
 
 
-                    string query = "SELECT Name, ProductID, Stocks, Price, Category, ImageURL FROM PRODUCTSINV " + whereClause;
+                    string query = "SELECT Name, PRODUCT_ID, Stocks, Price, Category, ImageURL FROM PRODUCTS " + whereClause;
 
                     using (OracleCommand command = new OracleCommand(query, connection))
                     {
