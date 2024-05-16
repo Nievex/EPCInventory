@@ -26,7 +26,7 @@
 
             <div>
                 <asp:Label runat="server" ID="ShopNameLabel" CssClass="shop-name-label"></asp:Label><br />
-                <p class="verified"><i class="fa fa-check-circle" aria-hidden="true"></i>Verified</p>
+                <p class="verified"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</p>
             </div>
 
             <div class="toggle-edit-container">

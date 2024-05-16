@@ -3,8 +3,9 @@
 <asp:Content ID="Navigation" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"></asp:ScriptManager>
     <div class="breadcrumb">
+        <h2>Edit Product</h2>
         <p>
-            HOME > Edit >
+            HOME / Edit /
             <asp:Label runat="server" ID="BreadcrumbID"></asp:Label>
         </p>
     </div>

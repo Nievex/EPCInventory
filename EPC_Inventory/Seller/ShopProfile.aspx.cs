@@ -131,6 +131,7 @@ namespace EPC_Inventory.Seller
                         Response.Write("File is a null");
                     }
                 }
+                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Profile updated successfully!');", true);
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception ex)

@@ -104,15 +104,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Seller\ForgotPassword.aspx" />
     <Content Include="images\empty-img.jpg" />
     <Content Include="images\login-img.jpg" />
     <Content Include="images\logo.svg" />
+    <Content Include="images\Product-sample.png" />
     <Content Include="Seller\Orders.aspx" />
     <Content Include="Seller\Register.aspx" />
     <Content Include="script.js" />
     <Content Include="Seller\Add.aspx" />
     <Content Include="Main\ShopProfile.aspx" />
     <Content Include="Seller\Edit.aspx" />
+    <Content Include="Seller\Sales.aspx" />
     <Content Include="Seller\ShopProfile.aspx" />
     <Content Include="Shop\RegistrationList.aspx" />
     <Content Include="Main\Edit.aspx" />
@@ -124,6 +127,13 @@
     <Content Include="Seller\Inventory.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Seller\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seller\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Seller\Orders.aspx.cs">
       <DependentUpon>Orders.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -158,6 +168,13 @@
     </Compile>
     <Compile Include="Seller\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seller\Sales.aspx.cs">
+      <DependentUpon>Sales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seller\Sales.aspx.designer.cs">
+      <DependentUpon>Sales.aspx</DependentUpon>
     </Compile>
     <Compile Include="Seller\SellerDashboard.Master.cs">
       <DependentUpon>SellerDashboard.Master</DependentUpon>

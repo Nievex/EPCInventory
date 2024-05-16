@@ -5,6 +5,7 @@ using System.IO;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
 using System.Web;
+using System.Web.UI;
 
 namespace EPC_Inventory.Seller
 {
@@ -103,11 +104,11 @@ namespace EPC_Inventory.Seller
                             int rowsAffected = command.ExecuteNonQuery();
                             if (rowsAffected > 0)
                             {
-                                ErrorMessageLabel.Text = "Shop registered successfully.";
+                                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Registered successfully!');", true);
                             }
                             else
                             {
-                                ErrorMessageLabel.Text = "Failed to register shop.";
+                                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Registration failed');", true);
                             }
                         }
                     }

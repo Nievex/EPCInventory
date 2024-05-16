@@ -72,7 +72,7 @@
                         </div>
                         <div>
                             <label>Contact No.</label><br />
-                            <asp:TextBox runat="server" TextMode="Number" ID="ContactNoField" CssClass="register-fld"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="ContactNoField" CssClass="register-fld"></asp:TextBox>
                         </div>
                         <div>
                             <label>First Name</label><br />
@@ -92,11 +92,11 @@
                         </div>
 
                         <asp:Button runat="server" ID="RegisterShopBtn" Text="Register" OnClick="RegisterShopBtn_Click" CssClass="register-btn" />
+                        <asp:Label runat="server" ID="ErrorMessageLabel" ForeColor="Red" CssClass="error-message-label" />
                     </div>
                 </div>
             </div>
         </div>
-        <asp:Label runat="server" ID="ErrorMessageLabel" ForeColor="Red" />
     </form>
 
     <script>

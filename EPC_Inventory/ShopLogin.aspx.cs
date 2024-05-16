@@ -44,7 +44,7 @@ namespace EPC_Inventory.Shop
                     }
                     else
                     {
-                        return -1; // Authentication failed
+                        return -1;
                     }
                 }
             }
