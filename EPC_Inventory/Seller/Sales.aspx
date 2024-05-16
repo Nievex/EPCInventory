@@ -2,8 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="breadcrumb">
-        <h2>Sales Report</h2>
-        <asp:Label runat="server" ID="Breadcrumb">HOME / Sales Report</asp:Label>
+        <h2>Dashboard</h2>
+        <asp:Label runat="server" ID="Breadcrumb">HOME</asp:Label>
     </div>
 
     <div class="sales-container">

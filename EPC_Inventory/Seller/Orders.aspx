@@ -35,7 +35,7 @@
 
                             <div class="payment-method">
                                 <p>Payment Method:</p>
-                                <asp:Label runat="server" ID="PaymentMethod" Text='<%# Eval("PAYMENT_METHOD") %>'></asp:Label>
+                                <asp:Label runat="server" ID="PaymentMethod" Text='<%# Eval("PAYMENT_METHOD") %>' CssClass="payment-mthd"></asp:Label>
                             </div>
 
                             <div class="customer-details">

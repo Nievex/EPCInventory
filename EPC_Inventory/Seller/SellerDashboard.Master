@@ -45,7 +45,7 @@
                 <asp:Image runat="server" ID="SideShopLogo" ImageUrl="~/images/logo.svg" CssClass="side-logo" />
                 <asp:Label runat="server" ID="SideShopName" CssClass="nav-shop-name">Easy Pet Care</asp:Label>
             </div>
-            <a href="#" class="sidenav-link">
+            <a href="Sales.aspx" class="sidenav-link">
                 <div class="sidenav-link-con">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <span>Dashboard</span>
@@ -63,13 +63,6 @@
                 <div class="sidenav-link-con">
                     <i class="fa fa-list-ol" aria-hidden="true"></i>
                     <span>Orders</span>
-                </div>
-            </a>
-
-            <a href="Sales.aspx" class="sidenav-link">
-                <div class="sidenav-link-con">
-                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                    <span>Sales</span>
                 </div>
             </a>
 

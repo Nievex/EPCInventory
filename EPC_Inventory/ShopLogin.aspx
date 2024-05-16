@@ -45,13 +45,11 @@
                                 <a href="/Seller/ForgotPassword.aspx">Forgot Password?</a>
                             </div>
                         </div>
-                        <asp:Button runat="server" ID="LoginBtn" OnClick="LoginBtnClick" Text="Login" CssClass="login-btn" />
                         <asp:Label runat="server" ID="ValidationLabel" CssClass="validation-txt"></asp:Label>
-                    </div>
-
-
-                    <div class="register-cta">
-                        <p>Don't have an account yet? <a href="/Seller/Register.aspx">Join now!</a></p>
+                        <div class="login-btns">
+                            <asp:Button runat="server" ID="LoginBtn" OnClick="LoginBtnClick" Text="Login" CssClass="login-btn" />
+                            <a href="/Seller/Register.aspx" class="shop-reg-btn">Register</a>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -16,7 +16,7 @@ namespace EPC_Inventory.Shop
             if (shopId != -1)
             {
                 Session["SHOP_ID"] = shopId;
-                Response.Redirect("Seller/Inventory.aspx");
+                Response.Redirect("Seller/Sales.aspx");
             }
             else
             {
