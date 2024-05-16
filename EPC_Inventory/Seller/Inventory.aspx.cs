@@ -1,10 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -18,6 +15,7 @@ namespace EPC_Inventory
             {
                 if (Session["SHOP_ID"] != null)
                 {
+                    ViewState["SortDirection"] = "ASC"; // Default sort direction
                     BindInventoryData(Convert.ToInt32(Session["SHOP_ID"]));
                 }
                 else
@@ -34,7 +32,12 @@ namespace EPC_Inventory
                 string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
                 using (OracleConnection connection = new OracleConnection(connectionString))
                 {
-                    string query = "SELECT Name, PRODUCT_ID, Stocks, Price, Category, ImageURL FROM PRODUCTS WHERE SHOP_ID = :UserId";
+                    string sortOrder = ViewState["SortDirection"].ToString();
+                    string query = $@"SELECT Name, PRODUCT_ID, Stocks, Price, Category, ImageURL 
+                                      FROM PRODUCTS 
+                                      WHERE SHOP_ID = :UserId 
+                                      ORDER BY Stocks {sortOrder}";
+
                     using (OracleCommand command = new OracleCommand(query, connection))
                     {
                         command.Parameters.Add("UserId", OracleDbType.Decimal).Value = userId;
@@ -58,7 +61,6 @@ namespace EPC_Inventory
             }
         }
 
-
         protected string GetBase64Image(object imageData)
         {
             if (imageData == DBNull.Value)
@@ -70,6 +72,32 @@ namespace EPC_Inventory
             string base64String = Convert.ToBase64String(bytes);
             string imageUrl = "data:image/jpeg;base64," + base64String;
             return imageUrl;
+        }
+
+        protected string GetStockColor(object stock)
+        {
+            int stockAmount = Convert.ToInt32(stock);
+
+            if (stockAmount > 750)
+            {
+                return "color: green;";
+            }
+            else if (stockAmount >= 500 && stockAmount <= 749)
+            {
+                return "color: yellow;";
+            }
+            else if (stockAmount >= 300 && stockAmount <= 499)
+            {
+                return "color: orange;";
+            }
+            else if (stockAmount >= 1 && stockAmount <= 299)
+            {
+                return "color: red;";
+            }
+            else
+            {
+                return "color: black;";
+            }
         }
 
         protected void DeleteProduct(object sender, EventArgs e)
@@ -112,7 +140,6 @@ namespace EPC_Inventory
             }
         }
 
-
         protected void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -133,7 +160,6 @@ namespace EPC_Inventory
                     {
                         whereClause += "LOWER(Name) LIKE '%' || :SearchQuery || '%' OR LOWER(Category) LIKE '%' || :SearchQuery || '%'";
                     }
-
 
                     string query = "SELECT Name, PRODUCT_ID, Stocks, Price, Category, ImageURL FROM PRODUCTS " + whereClause;
 
@@ -173,6 +199,18 @@ namespace EPC_Inventory
             catch (Exception ex)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('An error occurred while searching.');", true);
+            }
+        }
+
+        protected void SortByStock(object sender, EventArgs e)
+        {
+            string currentSortDirection = ViewState["SortDirection"].ToString();
+            string newSortDirection = currentSortDirection == "ASC" ? "DESC" : "ASC";
+            ViewState["SortDirection"] = newSortDirection;
+
+            if (Session["SHOP_ID"] != null)
+            {
+                BindInventoryData(Convert.ToInt32(Session["SHOP_ID"]));
             }
         }
     }

@@ -24,7 +24,11 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Category</th>
-                    <th>Stock</th>
+                    <th class="stocks-header">
+                        <asp:LinkButton ID="StockHeaderLinkButton" runat="server" OnClick="SortByStock">Stock 
+                            <i class="fa fa-sort" aria-hidden="true"></i>
+                        </asp:LinkButton>
+                    </th>
                     <th>Price</th>
                     <th>Actions</th>
                 </tr>
@@ -37,7 +41,7 @@
                             </td>
                             <td><%# Eval("Name") %></td>
                             <td><%# Eval("Category") %></td>
-                            <td><%# Eval("Stocks") %></td>
+                            <td class="stocks" style='<%# GetStockColor(Eval("Stocks")) %>'><%# Eval("Stocks") %></td>
                             <td>&#8369;<%# Eval("Price", "{0:N2}") %></td>
                             <td>
                                 <div class="dropdown">
